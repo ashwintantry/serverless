@@ -14,7 +14,7 @@ resource "aws_iam_role" "example_serverless_lambda_role" {
 data "template_file" "lambda_iam_role_policy" {
   template = "${file("iam_role_policy.json.tpl")}"
 }
-resource "aws_iam_policy" "lambda" {
+resource "aws_iam_policy" "example_serverless_lambda_policy" {
   name        = "example-serverless-lambda-policy"
   description = "example serverless lambda policy"
   policy      = "${data.template_file.lambda_iam_role_policy.rendered}"
@@ -22,6 +22,6 @@ resource "aws_iam_policy" "lambda" {
 
 ################## Lambda Custom Policy Attachment ###################
 resource "aws_iam_role_policy_attachment" "lambda" {
-  role       = "${aws_iam_role.lambda.name}"
-  policy_arn = "${aws_iam_policy.lambda.arn}"
+  role       = "${aws_iam_role.example_serverless_lambda_role.name}"
+  policy_arn = "${aws_iam_policy.example_serverless_lambda_policy.arn}"
 }
