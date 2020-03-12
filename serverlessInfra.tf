@@ -30,7 +30,7 @@ resource "aws_lambda_function" "lambda_serverless" {
   handler          = "requestUnicorn.js"
   memory_size      = 512
   source_code_hash = "${filebase64sha256("requestUnicorn.zip")}"
-  runtime          = "nodejs12.x"
+  runtime          = "nodejs12.0"
   timeout          = 60
   tags = merge(
     map("Name", "serverlessTest")
