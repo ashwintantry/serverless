@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Infrastructure Creation') {
             environment {
-                INFRA_ACTION = "destroy"
+                INFRA_ACTION = "apply"
             }
             steps {
                         script {
