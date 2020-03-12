@@ -27,7 +27,7 @@ resource "aws_lambda_function" "lambda_serverless" {
   filename         = "requestUnicorn.zip"
   description      = "example serverless lambda"
   role             = "${aws_iam_role.example_serverless_lambda_role.arn}"
-  handler          = "requestUnicorn.js"
+  handler          = "requestUnicorn.handler"
   memory_size      = 512
   source_code_hash = "${filebase64sha256("requestUnicorn.zip")}"
   runtime          = "nodejs10.x"
