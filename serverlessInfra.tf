@@ -42,7 +42,7 @@ resource "aws_api_gateway_rest_api" "example_serverless_api" {
   name        = "example-serverless-api"
   description = "example serverless api"
   endpoint_configuration {
-    types = ["EDGE OPTIMIZED"]
+    types = ["EDGE"]
   }
 }
 
