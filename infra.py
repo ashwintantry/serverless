@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
         #aug_env['TF_VAR_lambda_payload_filename'] = "../../../../target/%s" % file_to_deploy
 
-        print("=== Terraform %s for %s ===" % (INFRA_ACTION, LAYER))
+        print("=== Terraform %s ===" % (INFRA_ACTION))
         #os.chdir('../infra/terraform')
         print(os.getcwd())
         execute(['make', INFRA_ACTION], stdout=sys.stdout, stderr=sys.stderr, env=aug_env)
