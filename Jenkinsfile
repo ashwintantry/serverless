@@ -5,10 +5,8 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                dir('scripts') {
                     sh 'python3 -m venv venv'
                     sh 'venv/bin/pip3 install -r requirements.txt'
-                }
             }
         }
         stage('Infrastructure Creation') {
