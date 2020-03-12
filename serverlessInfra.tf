@@ -2,8 +2,7 @@ resource "aws_s3_bucket" "tan3_test_serverless_s3" {
   bucket = "tan3-test-serverless"
   acl    = "public-read"
   website {
-    index_document = "index.html"
-    error_document = "error.html"}
+    index_document = "index.html"}
 
   tags = merge(
     map("Classification", "public"),
