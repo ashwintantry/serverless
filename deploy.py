@@ -49,8 +49,8 @@ if __name__ == "__main__":
                 local_path = os.path.join(root, filename)
                 #with open(local_path) as f:
                     #s = f.read()
-                    print("File: "+local_path)
-                    s3.upload_file(local_path,"tan3-test-serverless",filename)
+                    #print("File: "+local_path)
+                    #s3.upload_file(local_path,"tan3-test-serverless",filename)
                     
 
                 print("File: "+local_path)
