@@ -67,7 +67,7 @@ if __name__ == "__main__":
                     file_path_temp = "js/vendor/"+filename
                     print (file_path_temp)
                 elif fnmatch.fnmatch(local_path, "*/js/*"):
-                    file_path_temp = "js/vendor/"+filename
+                    file_path_temp = "js/"+filename
                     print (file_path_temp)
                 else: file_path_temp =filename
                 if fnmatch.fnmatch(local_path, "*.gif"):
