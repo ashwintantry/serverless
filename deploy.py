@@ -20,9 +20,13 @@ if __name__ == "__main__":
         aug_env['TF_VAR_account_id'] = AWS_ACCOUNT_ID
         owd = os.getcwd()
         execute(['make', 'init'], env=aug_env, stdout=sys.stdout, stderr=sys.stderr)
-        data = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
-        data = '{"data": %s}' % data
-        bucket_name = json.loads(data)['data']
+        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
+        print('s3_bucket_name:', bucket_name)
+        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
+        print('s3_bucket_name:', bucket_name)
+        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
+        print('s3_bucket_name:', bucket_name)
+        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
         print('s3_bucket_name:', bucket_name)
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
