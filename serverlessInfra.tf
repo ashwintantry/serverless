@@ -64,6 +64,11 @@ resource "aws_api_gateway_method" "example_serverless_api_method" {
   http_method   = "POST"
   authorization = "COGNITO_USER_POOLS"
   authorizer_id = "${aws_api_gateway_authorizer.example_serverless_cognito.id}"
+  request_parameters={
+        "method.response.header.Access-Control-Allow-Headers" = true,
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin" = true
+    }
 }
 
 resource "aws_api_gateway_method_response" "example_serverless_api_method_responce" {
@@ -71,9 +76,6 @@ resource "aws_api_gateway_method_response" "example_serverless_api_method_respon
     resource_id   = "${aws_api_gateway_resource.example_serverless_api_resource.id}"
     http_method   = "${aws_api_gateway_method.example_serverless_api_method.http_method}"
     status_code   = "200"
-    response_models {
-        "application/json" = "Empty"
-    }
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = true,
         "method.response.header.Access-Control-Allow-Methods" = true,
