@@ -54,13 +54,28 @@ if __name__ == "__main__":
                     
 
                 print("File: "+local_path)
-                if fnmatch.fnmatch(file, "*.gif"):
-                    s3.upload_file(local_path,"tan3-test-serverless",filename,ExtraArgs={'ContentType': "image/gif"})
-                elif fnmatch.fnmatch(file, "*.png"):
-                    s3.upload_file(local_path,"tan3-test-serverless",filename,ExtraArgs={'ContentType': "image/png"})
-                elif fnmatch.fnmatch(file, "*.ico"):
-                    s3.upload_file(local_path,"tan3-test-serverless",filename)
-                else: s3.upload_file(local_path,"tan3-test-serverless",filename,ExtraArgs={'ContentType': "text/plain"})
+                if fnmatch.fnmatch(local_path, "*/css/*"):
+                    file_path_temp = "css/"+filename
+                    print (file_path_temp)
+                elif fnmatch.fnmatch(local_path, "*/fonts/*"):
+                    file_path_temp = "fonts/"+filename
+                    print (file_path_temp)
+                elif fnmatch.fnmatch(local_path, "*/images/*"):
+                    file_path_temp = "images/"+filename
+                    print (file_path_temp)
+                elif fnmatch.fnmatch(local_path, "*/js/vendor/*"):
+                    file_path_temp = "js/vendor/"+filename
+                    print (file_path_temp)
+                elif fnmatch.fnmatch(local_path, "*/js/*"):
+                    file_path_temp = "js/vendor/"+filename
+                    print (file_path_temp)
+                if fnmatch.fnmatch(local_path, "*.gif"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "image/gif"})
+                elif fnmatch.fnmatch(local_path, "*.png"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "image/png"})
+                elif fnmatch.fnmatch(local_path, "*.ico"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp)
+                else: s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/plain"})
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
