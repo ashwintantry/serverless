@@ -42,7 +42,9 @@ if __name__ == "__main__":
         with open('config.js', 'r') as f:    
             print(f.readlines())
         os.chdir("../")
-        s3 = boto3.client('s3')
+        s3 = boto3.client('s3',
+                         aws_account_id = aug_env['TF_VAR_account_id'],
+                         profile ="default")
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
 
