@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-          INFRA_ACTION = "destroy"
+          INFRA_ACTION = "apply"
          }
     stages {
         stage('Setup') {
@@ -19,6 +19,12 @@ pipeline {
                         }
             }
         }
-
+        stage('Deploy') {
+            steps {
+                    script {
+                           sh 'AWS_ACCOUNT_ID=763453301580 venv/bin/python3 deploy.py'
+                        }
+            }
+        }
     }
 }
