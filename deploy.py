@@ -41,6 +41,21 @@ if __name__ == "__main__":
                 f.write(line)
         with open('config.js', 'r') as f:    
             print(f.readlines())
+        os.chdir("../")
+        s3 = boto3.client('s3')
+        print("Current dir : " + os.getcwd())
+        for root, dirs, files in os.walk(os.getcwd()):
+
+            for filename in files:
+                # construct the full local path
+                local_path = os.path.join(root, filename)
+                with open(local_path) as f:
+                    s = f.read()
+                    print("File: "+local_path)
+                    s3.upload_file(local_path, bucket_name,s)
+
+                #print("File: "+local_path)
+                #s3.upload_file(local_path, bucket_name)
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
