@@ -65,7 +65,6 @@ resource "aws_api_gateway_method" "example_serverless_api_method" {
   authorization = "COGNITO_USER_POOLS"
   authorizer_id = "${aws_api_gateway_authorizer.example_serverless_cognito.id}"
   request_parameters={
-        "method.response.header.Access-Control-Allow-Headers" = true,
         "method.response.header.Access-Control-Allow-Origin" = true
     }
 }
@@ -76,7 +75,6 @@ resource "aws_api_gateway_method_response" "example_serverless_api_method_respon
     http_method   = "${aws_api_gateway_method.example_serverless_api_method.http_method}"
     status_code   = "200"
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = true,
         "method.response.header.Access-Control-Allow-Origin" = true
     }
     depends_on = ["aws_api_gateway_method.example_serverless_api_method"]
@@ -97,8 +95,6 @@ resource "aws_api_gateway_integration_response" "integration_response" {
     http_method   = "${aws_api_gateway_method.example_serverless_api_method.http_method}"
     status_code   = "${aws_api_gateway_method_response.example_serverless_api_method_responce.status_code}"
     response_parameters = {
-        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-        "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
         "method.response.header.Access-Control-Allow-Origin" = "'*'"
     }
     depends_on = ["aws_api_gateway_method_response.example_serverless_api_method_responce"]
