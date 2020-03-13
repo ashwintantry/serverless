@@ -22,12 +22,17 @@ if __name__ == "__main__":
         execute(['make', 'init'], env=aug_env, stdout=sys.stdout, stderr=sys.stderr)
         bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
         print('s3_bucket_name:', bucket_name)
-        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
-        print('s3_bucket_name:', bucket_name)
-        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
-        print('s3_bucket_name:', bucket_name)
-        bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
-        print('s3_bucket_name:', bucket_name)
+        api_http = execute(['terraform', 'output', '-json', 'api_http'], env=aug_env).strip()
+        print('api_http:', api_http)
+        pool_id = execute(['terraform', 'output', '-json', 'pool_id'], env=aug_env).strip()
+        print('pool_id:', pool_id)
+        client_id = execute(['terraform', 'output', '-json', 'client_id'], env=aug_env).strip()
+        print('s3_bucket_name:', client_id)
+        os.chdir("../website/js")
+        print(os.getcwd())
+        with open('config.js', 'r') as f:
+            data = json.load(f)
+            print('data:', data)
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
