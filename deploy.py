@@ -42,7 +42,7 @@ if __name__ == "__main__":
         with open('config.js', 'r') as f:    
             print(f.readlines())
         os.chdir("../")
-        s3 = boto3.client('s3')
+        s3 = boto3.client('s3',aws_access_key_id="AKIA3DQK44NGKEY57IMV", aws_secret_access_key="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")
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
             for filename in files:
@@ -50,7 +50,7 @@ if __name__ == "__main__":
                 with open(local_path) as f:
                     s = f.read()
                     print("File: "+local_path)
-                    s3.upload_file(local_path,"tan3-test-serverless",local_path)
+                    s3.upload_file(local_path,"tan3-test-serverless",s)
                     
 
                 #print("File: "+local_path)
