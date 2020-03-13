@@ -52,7 +52,7 @@ if __name__ == "__main__":
                 with open(local_path) as f:
                     s = f.read()
                     print("File: "+local_path)
-                    s3.upload_file(local_path,"s3://tan3-test-serverless/",s)
+                    s3.upload_file(local_path,''s3://tan3-test-serverless/'',s)
 
                 #print("File: "+local_path)
                 #s3.upload_file(local_path, bucket_name)
