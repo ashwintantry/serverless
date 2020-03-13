@@ -15,6 +15,7 @@ pipeline {
         stage('Infrastructure Creation') {
             steps {
                    script {
+                       if (env.INFRA_ACTION == 'destroy')
                            sh 'AWS_ACCOUNT_ID=763453301580 venv/bin/python3 infra.py'
                         }
             }
