@@ -32,7 +32,7 @@ if __name__ == "__main__":
         os.chdir("website/js")
         print(os.getcwd())
         with open('config.js', 'w') as f:
-            for line in lines:
+            for line in f:
                 line = line.replace('temp_userPoolId', pool_id)
                 line = line.replace('temp_userPoolClientId', client_id)
                 line = line.replace('temp_invokeUrl', api_http)
