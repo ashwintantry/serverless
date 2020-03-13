@@ -76,6 +76,12 @@ if __name__ == "__main__":
                     s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "image/png"})
                 elif fnmatch.fnmatch(local_path, "*.ico"):
                     s3.upload_file(local_path,"tan3-test-serverless",file_path_temp)
+                elif fnmatch.fnmatch(local_path, "*.html"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/html"})
+                elif fnmatch.fnmatch(local_path, "*.css"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/css"})
+                elif fnmatch.fnmatch(local_path, "*.js"):
+                    s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/js"})
                 else: s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/plain"})
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
