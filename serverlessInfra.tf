@@ -50,11 +50,16 @@ resource "aws_api_gateway_resource" "example_serverless_api_resource" {
   parent_id   = "${aws_api_gateway_rest_api.example_serverless_api.root_resource_id}"
   path_part   = "ride"
 }
+
+data "aws_cognito_user_pools" "selected" {
+  name = "example-serverless-cognito-pool"
+}
+
 resource "aws_api_gateway_authorizer" "example_serverless_cognito" {
   name          = "cognito"
   type          = "COGNITO_USER_POOLS"
   rest_api_id   = "${aws_api_gateway_rest_api.example_serverless_api.id}"
-  provider_arns = ["${aws_cognito_user_pool.example_serverless_cognito_pool.arns}"]
+  provider_arns = ["${aws_cognito_user_pools.selected.arns}"]
 }
 
 resource "aws_api_gateway_method" "example_serverless_api_method" {
