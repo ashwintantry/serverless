@@ -32,8 +32,7 @@ if __name__ == "__main__":
         os.chdir("website/js")
         print(os.getcwd())
         with open('config.js', 'r') as f:
-            data = json.load(f)
-            print('data:', data)
+            print(f.readlines())
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
