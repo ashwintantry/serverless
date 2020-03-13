@@ -31,7 +31,13 @@ if __name__ == "__main__":
         print(os.getcwd())
         os.chdir("website/js")
         print(os.getcwd())
-        with open('config.js', 'r') as f:
+        with open('config.js', 'w') as f:
+            for line in lines:
+                line = line.replace('temp_userPoolId', pool_id)
+                line = line.replace('temp_userPoolClientId', client_id)
+                line = line.replace('temp_invokeUrl', api_http)
+                f.write(line)
+        with open('config.js', 'r') as f:    
             print(f.readlines())
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
