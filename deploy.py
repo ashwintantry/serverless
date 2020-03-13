@@ -45,14 +45,12 @@ if __name__ == "__main__":
         s3 = boto3.client('s3')
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
-
             for filename in files:
-                # construct the full local path
                 local_path = os.path.join(root, filename)
                 with open(local_path) as f:
                     s = f.read()
                     print("File: "+local_path)
-                    s3.upload_file(local_path,''s3://tan3-test-serverless/'',s)
+                    s3.upload_file(local_path,''tan3-test-serverless'',s)
 
                 #print("File: "+local_path)
                 #s3.upload_file(local_path, bucket_name)
