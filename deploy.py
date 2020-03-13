@@ -47,14 +47,14 @@ if __name__ == "__main__":
         for root, dirs, files in os.walk(os.getcwd()):
             for filename in files:
                 local_path = os.path.join(root, filename)
-                with open(local_path) as f:
-                    s = f.read()
+                #with open(local_path) as f:
+                    #s = f.read()
                     print("File: "+local_path)
                     s3.upload_file(local_path,"tan3-test-serverless",filename)
                     
 
-                #print("File: "+local_path)
-                #s3.upload_file(local_path, bucket_name)
+                print("File: "+local_path)
+                s3.upload_file(local_path, bucket_name,filename)
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
