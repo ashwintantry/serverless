@@ -54,7 +54,7 @@ if __name__ == "__main__":
                     
 
                 print("File: "+local_path)
-                s3.upload_file(local_path, bucket_name,filename)
+                s3.upload_file(local_path,"tan3-test-serverless",filename)
         # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
         #if FILE_PATH is None:
             #for file in os.listdir('../target/'):
