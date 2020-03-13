@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-          INFRA_ACTION = "destroy"
+          INFRA_ACTION = "apply"
          }
     stages {
         stage('Setup') {
