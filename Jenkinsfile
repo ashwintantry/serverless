@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-          INFRA_ACTION = "apply"
+          INFRA_ACTION = "destroy"
          }
     stages {
         stage('Setup') {
@@ -22,6 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                     script {
+                        if (env.INFRA_ACTION == 'apply')
                            sh 'AWS_ACCOUNT_ID=763453301580 venv/bin/python3 deploy.py'
                         }
             }
