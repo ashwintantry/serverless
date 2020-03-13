@@ -42,7 +42,7 @@ if __name__ == "__main__":
         with open('config.js', 'r') as f:    
             print(f.readlines())
         os.chdir("../")
-        s3 = boto3.client('s3',aws_access_key_id="AKIA3DQK44NGEUX4H4MB", aws_secret_access_key="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")
+        s3 = boto3.client('s3',aws_access_key_id="AKIA3DQK44NGOOMGGV7X", aws_secret_access_key="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")
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
             for filename in files:
