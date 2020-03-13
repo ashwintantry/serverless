@@ -28,7 +28,8 @@ if __name__ == "__main__":
         print('pool_id:', pool_id)
         client_id = execute(['terraform', 'output', '-json', 'client_id'], env=aug_env).strip()
         print('s3_bucket_name:', client_id)
-        os.chdir("../website/js")
+        print(os.getcwd())
+        os.chdir("/website/js")
         print(os.getcwd())
         with open('config.js', 'r') as f:
             data = json.load(f)
