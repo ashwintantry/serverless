@@ -69,6 +69,7 @@ if __name__ == "__main__":
                 elif fnmatch.fnmatch(local_path, "*/js/*"):
                     file_path_temp = "js/vendor/"+filename
                     print (file_path_temp)
+                else: file_path_temp =filename
                 if fnmatch.fnmatch(local_path, "*.gif"):
                     s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "image/gif"})
                 elif fnmatch.fnmatch(local_path, "*.png"):
