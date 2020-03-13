@@ -66,6 +66,19 @@ resource "aws_api_gateway_method" "example_serverless_api_method" {
   authorizer_id = "${aws_api_gateway_authorizer.example_serverless_cognito.id}"
 }
 
+resource "aws_api_gateway_method_response" "example_serverless_api_method_responce" {
+    rest_api_id   = "${aws_api_gateway_rest_api.example_serverless_api.id}"
+    resource_id   = "${aws_api_gateway_resource.example_serverless_api_resource.id}"
+    http_method   = "${aws_api_gateway_method.example_serverless_api_method.http_method}"
+    status_code   = "200"
+    response_parameters {
+        "method.response.header.Access-Control-Allow-Headers" = true,
+        "method.response.header.Access-Control-Allow-Methods" = true,
+        "method.response.header.Access-Control-Allow-Origin" = true
+    }
+    depends_on = ["aws_api_gateway_method.example_serverless_api_method"]
+}
+
 resource "aws_api_gateway_integration" "integration" {
   rest_api_id             = "${aws_api_gateway_rest_api.example_serverless_api.id}"
   resource_id             = "${aws_api_gateway_resource.example_serverless_api_resource.id}"
