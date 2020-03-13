@@ -86,6 +86,18 @@ resource "aws_api_gateway_integration" "integration" {
   uri                     = "${aws_lambda_function.lambda_serverless.invoke_arn}"
 }
 
+resource "aws_api_gateway_integration_response" "integration_response" {
+    rest_api_id   = "${aws_api_gateway_rest_api.example_serverless_api.id}"
+    resource_id   = "${aws_api_gateway_resource.example_serverless_api_resource.id}"
+    http_method   = "${aws_api_gateway_method.example_serverless_api_method.http_method}"
+    status_code   = "${aws_api_gateway_method_response.example_serverless_api_method_responce.status_code}"
+    response_parameters = {
+        "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
+        "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    }
+    depends_on = ["aws_api_gateway_method_response.example_serverless_api_method_responce"]
+}
 resource "aws_api_gateway_deployment" "example_serverless_deploy" {
   depends_on = ["aws_api_gateway_integration.integration"]
   stage_name  = "prod"
