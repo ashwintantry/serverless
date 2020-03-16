@@ -9,15 +9,15 @@ from common import execute
 
 AWS_ACCOUNT_ID = os.environ['AWS_ACCOUNT_ID']
 INFRA_ACTION = os.environ['INFRA_ACTION']
-#LAYER = os.environ['LAYER']
-# SLACK_TITLE = "WOW-Serverless-%s-Pipeline" % LAYER
-#FILE_PATH = os.environ.get('FILE_PATH', None)
+
 
 if __name__ == "__main__":
     try:
 
         aug_env = os.environ.copy()
         aug_env['TF_VAR_account_id'] = AWS_ACCOUNT_ID
+        aug_env['AWS_ACCESS_KEY_ID'] = credentials['genAccessKey']
+        aug_env['AWS_SECRET_ACCESS_KEY'] = credentials['genSecretAccessKey']
         owd = os.getcwd()
         execute(['make', 'init'], env=aug_env, stdout=sys.stdout, stderr=sys.stderr)
         bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
@@ -42,7 +42,9 @@ if __name__ == "__main__":
         with open('config.js', 'r') as f:    
             print(f.readlines())
         os.chdir("../")
-        s3 = boto3.client('s3',aws_access_key_id="AKIA3DQK44NGOOMGGV7X", aws_secret_access_key="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")
+        s3 = boto3.client('s3',
+                          aws_access_key_id=aug_env['AWS_ACCESS_KEY_ID'],
+                          aws_secret_access_key=aug_env['AWS_SECRET_ACCESS_KEY'])
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
             for filename in files:
