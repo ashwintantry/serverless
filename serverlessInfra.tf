@@ -55,7 +55,7 @@ resource "aws_api_gateway_authorizer" "example_serverless_cognito" {
   name          = "cognito"
   type          = "COGNITO_USER_POOLS"
   rest_api_id   = "${aws_api_gateway_rest_api.example_serverless_api.id}"
-  provider_arns = ["arn:aws:cognito-idp:ap-south-1:763453301580:userpool/${aws_cognito_user_pool.example_serverless_cognito_pool.id}"]
+  provider_arns = ["arn:aws:cognito-idp:ap-south-1:868707139949:userpool/${aws_cognito_user_pool.example_serverless_cognito_pool.id}"]
 }
 
 resource "aws_api_gateway_method" "example_serverless_api_method" {
