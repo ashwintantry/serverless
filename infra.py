@@ -18,8 +18,8 @@ if __name__ == "__main__":
         #credentials = get_temporary_credentials("AssumeRoleSessionWOW")
 
         aug_env = os.environ.copy()
-        #aug_env['AWS_ACCESS_KEY_ID'] = credentials['AccessKeyId']
-        #aug_env['AWS_SECRET_ACCESS_KEY'] = credentials['SecretAccessKey']
+        aug_env['AWS_ACCESS_KEY_ID'] = credentials['genAccessKey']
+        aug_env['AWS_SECRET_ACCESS_KEY'] = credentials['genSecretAccessKey']
         #aug_env['AWS_SESSION_TOKEN'] = credentials['SessionToken']
         aug_env['TF_VAR_account_id'] = AWS_ACCOUNT_ID
 
