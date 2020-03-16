@@ -9,6 +9,8 @@ from common import execute
 
 AWS_ACCOUNT_ID = os.environ['AWS_ACCOUNT_ID']
 INFRA_ACTION = os.environ['INFRA_ACTION']
+AWS_ACCESS_KEY_ID1 = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY1 = os.environ['AWS_SECRET_ACCESS_KEY']
 
 
 if __name__ == "__main__":
@@ -16,8 +18,6 @@ if __name__ == "__main__":
 
         aug_env = os.environ.copy()
         aug_env['TF_VAR_account_id'] = AWS_ACCOUNT_ID
-        aug_env['AWS_ACCESS_KEY_ID'] = credentials['genAccessKey']
-        aug_env['AWS_SECRET_ACCESS_KEY'] = credentials['genSecretAccessKey']
         owd = os.getcwd()
         execute(['make', 'init'], env=aug_env, stdout=sys.stdout, stderr=sys.stderr)
         bucket_name = execute(['terraform', 'output', '-json', 's3_bucket_name'], env=aug_env).strip()
@@ -43,8 +43,8 @@ if __name__ == "__main__":
             print(f.readlines())
         os.chdir("../")
         s3 = boto3.client('s3',
-                          aws_access_key_id=aug_env['AWS_ACCESS_KEY_ID'],
-                          aws_secret_access_key=aug_env['AWS_SECRET_ACCESS_KEY'])
+                          aws_access_key_id=AWS_ACCESS_KEY_ID1,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY1)
         print("Current dir : " + os.getcwd())
         for root, dirs, files in os.walk(os.getcwd()):
             for filename in files:
@@ -85,28 +85,6 @@ if __name__ == "__main__":
                 elif fnmatch.fnmatch(local_path, "*.js"):
                     s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/js"})
                 else: s3.upload_file(local_path,"tan3-test-serverless",file_path_temp,ExtraArgs={'ContentType': "text/plain"})
-        # get file to deploy from the build execution if we haven't been passed pre-built path as an env var
-        #if FILE_PATH is None:
-            #for file in os.listdir('../target/'):
-                #if fnmatch.fnmatch(file, "tabledata*.jar"):
-                    #file_to_deploy = file
-
-            #if not file_to_deploy:
-                #raise Exception('File to deploy not found')
-        # else copy file from FILE_PATH to the ../target directory and set that as file_to_deploy
-        #else:
-            #target_dir = '../target'
-            #if not os.path.exists(target_dir):
-                #os.makedirs(target_dir)
-            #file_to_deploy = os.path.basename(FILE_PATH)
-            #execute(['cp', FILE_PATH, "%s/%s" % (target_dir, file_to_deploy)])
-
-        #aug_env['TF_VAR_lambda_payload_filename'] = "../../../../target/%s" % file_to_deploy
-
-        #print("=== Terraform %s for %s ===" % (INFRA_ACTION, LAYER))
-        #os.chdir('../infra/terraform')
-        #print(os.getcwd())
-        #execute(['make', INFRA_ACTION], stdout=sys.stdout, stderr=sys.stderr, env=aug_env)
 
     except:
         raise Exception('`IaC` phase failed!')
